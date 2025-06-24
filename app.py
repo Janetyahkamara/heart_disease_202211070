@@ -3,7 +3,7 @@ from google.cloud import bigquery
 from google.oauth2 import service_account
 import os
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "/etc/secrets/gcp_key.json"
-app = Flask(name)
+app = Flask(__name__)
 
 # Authenticate with service account
 key_path = "/etc/secrets/gcp_key.json"  # secure path on Render
@@ -178,5 +178,5 @@ def predict():
     except Exception as e:
         return jsonify({"error": str(e)}), 400
 
-if name == "main":
+if __name__ == "__main__":
     app.run(debug=True)
